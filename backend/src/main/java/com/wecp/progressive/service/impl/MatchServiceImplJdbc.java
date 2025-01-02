@@ -1,77 +1,43 @@
 package com.wecp.progressive.service.impl;
 
-import java.util.List;
-
+import com.wecp.progressive.dao.MatchDAO;
 import com.wecp.progressive.entity.Match;
 import com.wecp.progressive.service.MatchService;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public class MatchServiceImplJdbc implements MatchService {
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        // TODO Auto-generated method stub
-        return super.clone();
+    private MatchDAO matchDAO;
+
+    public MatchServiceImplJdbc(MatchDAO matchDAO) {
+        this.matchDAO = matchDAO;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return super.equals(obj);
+    public List<Match> getAllMatches() throws SQLException {
+        return matchDAO.getAllMatches();
     }
 
     @Override
-    protected void finalize() throws Throwable {
-        // TODO Auto-generated method stub
-        super.finalize();
+    public Match getMatchById(int matchId) throws SQLException {
+        return matchDAO.getMatchById(matchId);
     }
 
     @Override
-    public int hashCode() {
-        // TODO Auto-generated method stub
-        return super.hashCode();
+    public Integer addMatch(Match match) throws SQLException {
+        return matchDAO.addMatch(match);
     }
 
     @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+    public void updateMatch(Match match) throws SQLException {
+        matchDAO.updateMatch(match);
     }
 
     @Override
-    public Integer addMatch(Match match) {
-        // TODO Auto-generated method stub
-        return null;
+    public void deleteMatch(int matchId) throws SQLException {
+        matchDAO.deleteMatch(matchId);
     }
-
-    @Override
-    public void deleteMatch(int matchId) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public List<Match> getAllMatches() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Match> getAllMatchesByStatus(String status) {
-        // TODO Auto-generated method stub
-        return MatchService.super.getAllMatchesByStatus(status);
-    }
-
-    @Override
-    public Match getMatchById(int matchId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void updateMatch(Match match) {
-        
-    }
-
-    
 
 }

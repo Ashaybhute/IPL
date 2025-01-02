@@ -1,84 +1,52 @@
 package com.wecp.progressive.service.impl;
 
-import java.util.List;
-
+import com.wecp.progressive.dao.TeamDAO;
 import com.wecp.progressive.entity.Team;
 import com.wecp.progressive.service.TeamService;
 
-public class TeamServiceImplJdbc  implements TeamService {
+import java.sql.SQLException;
+import java.util.Comparator;
+import java.util.List;
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        // TODO Auto-generated method stub
-        return super.clone();
+public class TeamServiceImplJdbc implements TeamService {
+
+    private TeamDAO teamDAO;
+
+    public TeamServiceImplJdbc(TeamDAO teamDAO) {
+        this.teamDAO = teamDAO;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return super.equals(obj);
+    public List<Team> getAllTeams() throws SQLException {
+        return teamDAO.getAllTeams();
     }
 
     @Override
-    protected void finalize() throws Throwable {
-        // TODO Auto-generated method stub
-        super.finalize();
+    public int addTeam(Team team) throws SQLException {
+        return teamDAO.addTeam(team);
     }
 
     @Override
-    public int hashCode() {
-        // TODO Auto-generated method stub
-        return super.hashCode();
+    public List<Team> getAllTeamsSortedByName() throws SQLException {
+        List<Team> sortedTeams = teamDAO.getAllTeams();
+        if (!sortedTeams.isEmpty()) {
+            sortedTeams.sort(Comparator.comparing(Team::getTeamName));
+        }
+        return sortedTeams;
     }
 
     @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+    public Team getTeamById(int teamId) throws SQLException {
+        return teamDAO.getTeamById(teamId);
     }
 
     @Override
-    public int addTeam(Team team) {
-        // TODO Auto-generated method stub
-        return 0;
+    public void updateTeam(Team team) throws SQLException {
+        teamDAO.updateTeam(team);
     }
 
     @Override
-    public void deleteTeam(int teamId) {
-        // TODO Auto-generated method stub
-        TeamService.super.deleteTeam(teamId);
+    public void deleteTeam(int teamId) throws SQLException {
+        teamDAO.deleteTeam(teamId);
     }
-
-    @Override
-    public void emptyArrayList() {
-        // TODO Auto-generated method stub
-        TeamService.super.emptyArrayList();
-    }
-
-    @Override
-    public List<Team> getAllTeams() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public List<Team> getAllTeamsSortedByName() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Team getTeamById(int teamId) {
-        // TODO Auto-generated method stub
-        return TeamService.super.getTeamById(teamId);
-    }
-
-    @Override
-    public void updateTeam(Team team) {
-        // TODO Auto-generated method stub
-        TeamService.super.updateTeam(team);
-    }
-
-    
-
 }
